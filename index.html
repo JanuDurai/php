@@ -1,0 +1,12 @@
+<!DOCTYPE >
+<html>
+  <body>
+    <p>This is html</p>
+    <?php echo 'php' ?>
+  </body>
+</html>
+<!-- This is wrong approach as we can write html code inside php file but not hph code in html file.
+ Because browser send request to apache server when file format is .php. Hence php code is processed by
+ PHP engine and html code is processed by browser. When we place php code inside .html file browser does not 
+ send request to apache server. Hence php code is not processed and it is ignored only html code result 
+ will be seen in screen  -->
