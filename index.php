@@ -10,4 +10,4 @@
 
 <!-- <?php echo 'php' ?> -->
 
-<!-- If we place php code  will be procossed between html and outside the html code also -->fg
+<!-- If we place php code  will be procossed between html and outside the html code also -->
