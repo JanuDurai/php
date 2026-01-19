@@ -1,0 +1,7 @@
+ <?php echo First ?> It takes as variable when it is not enclosed in '' 
+ <?php 'First' ?> Doesn't print anything & also doesn't show any error 
+
+Wrong syntax
+  <? echo 'Shorthand for echo tag' ?> 
+ <? echo 'this code is within short tags, but will only work ' .
+        'if short_open_tag is enabled'; ?> 
