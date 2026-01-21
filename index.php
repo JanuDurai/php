@@ -28,6 +28,19 @@ echo "Initial PHP setup";
         This is a paragraph.
     </p>
 
+    <!-- syntax -->
+    <!-- trail new line -->
+    
+    <?php echo 'First Line'; ?>
+    No New Line
+    <?= 'New line will be added'; ?> 
+
+    <?php echo "Some text"; ?>
+    No newline
+    <?= "But newline now" ?>
+<!-- No new line will be added. php does not control new line inside html code  -->
+
+
 </body>
 
 </html>
