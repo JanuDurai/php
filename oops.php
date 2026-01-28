@@ -108,7 +108,7 @@ class Person
     public function displayInfo()
     {
         // $this->dept = "TEst"; can't be modified in its own func
-        echo "Name: ", $this->name, "\n", "Age: ", $this->age, "Dept: ", $this->dept,"\n";
+        echo "Name: ", $this->name, "\n", "Age: ", $this->age, "Dept: ", $this->dept, "\n";
     }
 }
 
@@ -118,7 +118,7 @@ $first_person = new Person("Janu", 23);
 
 $first_person->displayInfo();
 
-echo "Readonly property in class person is ", $first_person->dept,"\n";
+echo "Readonly property in class person is ", $first_person->dept, "\n";
 
 // $first_person->dept = "Dynamic";  can't change readonly property.
 
@@ -150,9 +150,189 @@ readonly class Foo
 
 $foo_object = new Foo("Janu");
 echo "Read only class variable name ", $foo_object->name, "\n";
-var_dump(($foo_object))
+var_dump(($foo_object));
 // $foo_object->name = "Modify Name"; Readonly class property value can't be changed.
 // $foo_object->add_prop = "Dynamic property"; Dynamic property can't be created in readonly class. 
+
+
+// Abstract class
+abstract class Shape
+{
+    abstract public function area();
+}
+
+class Square extends Shape
+{
+    public $a;
+    public function area()
+    {
+        return $this->a * $this->a;
+    }
+}
+
+// final class
+
+final class Bank
+{
+
+}
+// class SBI extends Bank
+// {
+
+// }
+
+// final method
+
+class Test
+{
+    final public function run()
+    {
+    }
+}
+
+// const
+
+class Math
+{
+    const PI = 3.14;
+}
+
+echo Math::PI;
+
+
+// traits
+
+trait TraitA
+{
+    public $trait_var = "Say";
+    public function sayHello()
+    {
+        echo "Hello";
+    }
+}
+
+trait TraitB
+{
+    public function sayHi()
+    {
+        echo "Hi";
+    }
+}
+
+class Greet
+{
+    use TraitA, TraitB;
+
+    public function greetMethod()
+    {
+        echo $this->trait_var;
+        echo $this->sayHello(), "\n";
+        echo $this->sayHi(), "\n";
+
+
+    }
+}
+
+$greet_obj = new Greet();
+$greet_obj->greetMethod();
+
+// overloading
+
+class TestOverloading
+{
+    public function __call($name, $args)
+    {
+        echo "Method $name called";
+    }
+}
+$obj = new TestOverloading();
+$obj->add(1, 2);
+
+// interface
+
+interface Payment
+{
+    // public $method; interface does not have properties
+    public function pay();
+}
+class GPay implements Payment
+{
+    public function pay()
+    {
+        echo "Paid using GPay";
+    }
+}
+
+$payment_obj = new GPay();
+$payment_obj->pay();
+
+// static 
+class CounterStatic
+{
+    public static $count = 0;
+
+    public static function inc()
+    {
+        echo "Static counter is ", self::$count;
+
+        self::$count++;
+    }
+}
+
+CounterStatic::inc();
+
+// interface
+
+interface Flyable
+{
+    public function fly();
+}
+
+interface Swimmable
+{
+    public function swim();
+    // public function eat(); a  class which follow interface must have all the methods dec in interface
+}
+
+class Duck implements Flyable, Swimmable
+{
+    public function fly()
+    {
+        echo "Duck flying";
+    }
+
+    public function swim()
+    {
+        echo "Duck swimming";
+    }
+}
+
+// abstract
+
+abstract class Animal
+{
+    protected $name;
+
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
+
+    abstract public function sound();
+
+    public function eat()
+    {
+        echo "Eating...";
+    }
+}
+
+class Dog extends Animal
+{
+    public function sound()
+    {
+        echo "Bark";
+    }
+}
 
 
 ?>
