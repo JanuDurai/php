@@ -63,7 +63,11 @@ $parent_obj->log();
 
 abstract class Payment
 {
-    abstract public function pay($amount);
+     abstract function pay($amount);
+     
+     public function send($amount){
+        echo "sdfgh";
+     }
 }
 
 class UpiPayment extends Payment
@@ -83,6 +87,8 @@ $payment_obj->pay(12);
 
 interface Logger
 {
+    // public $log;
+    const count = 0;
     public function write(string $msg): void;
 }
 
