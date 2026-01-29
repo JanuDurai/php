@@ -235,6 +235,8 @@ class Greet
 
 $greet_obj = new Greet();
 $greet_obj->greetMethod();
+$greet_obj->sayHello();
+
 
 // overloading
 
