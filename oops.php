@@ -334,5 +334,36 @@ class Dog extends Animal
     }
 }
 
+// polymorphism
+
+interface PaymentGateway
+{
+    public function pay(float $amount): string;
+}
+
+class Paypal implements PaymentGateway
+{
+    public function pay(float $amount): string
+    {
+        return "Paid $amount using Paypal";
+    }
+}
+
+class Stripe implements PaymentGateway
+{
+    public function pay(float $amount): string
+    {
+        return "Paid $amount using Stripe";
+    }
+}
+
+function processPayment(PaymentGateway $gateway)
+{
+    echo $gateway->pay(500);
+}
+
+processPayment(new Paypal());
+processPayment(new Stripe());
+
 
 ?>

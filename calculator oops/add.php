@@ -8,3 +8,4 @@ class Add extends Calculator
         return $this->num1 + $this->num2;
     }
 }
+   
