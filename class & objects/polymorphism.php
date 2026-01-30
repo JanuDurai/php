@@ -63,7 +63,11 @@ $parent_obj->log();
 
 abstract class Payment
 {
-    abstract public function pay($amount);
+     abstract function pay($amount);
+     
+     public function send($amount){
+        echo "sdfgh";
+     }
 }
 
 class UpiPayment extends Payment
@@ -83,6 +87,8 @@ $payment_obj->pay(12);
 
 interface Logger
 {
+    // public $log;
+    const count = 0;
     public function write(string $msg): void;
 }
 
@@ -97,4 +103,119 @@ class FileLogger implements Logger
 // $file_obj = new Logger(); cannot instantiate 
 $file_obj = new FileLogger();
 $file_obj->write("File is downloaded");
+
+// over riding with diff return types
+
+// class A
+// {
+//     public function getUser(): string
+//     {
+//         return "";
+//     }
+// }
+
+// class B extends A
+// {
+//     public function getUser(): int
+//     {
+//         return 5;
+//     }
+// } 
+// class  covariance only works for obj type, not for primitive types. 
+
+class Userr
+{
+}
+class AdminUser extends Userr
+{
+}
+
+class A
+{
+    public function getUser(): Userr
+    {
+        return new Userr();
+    }
+}
+
+class B extends A
+{
+    public function getUser(): AdminUser
+    {
+        return new AdminUser();
+    }
+}
+// covariance works for obj type.
+
+// can give union reutrn types
+
+class C
+{
+    public function getUser(): string|int
+    {
+        return "abc";
+    }
+}
+
+class D extends C
+{
+    public function getUser(): string|int
+    {
+        return 5;
+    }
+}
+// example for covariance and contravariance
+
+class Animal
+{
+}
+class Dog extends Animal
+{
+}
+
+class Shapes
+{
+    public function get(): Animal
+    {
+    }
+    public function set(Dog $d)
+    {
+    }
+}
+
+class Rectangle extends Shapes
+{
+    public function get(): Dog
+    {
+    }      // Covariance
+    public function set(Animal $a)
+    {
+    }  // Contravariance
+}
+
+// overriding visiblity
+
+class publicMthodClass
+{
+    public function test()
+    {
+    }
+    protected function get()
+    {
+    }
+
+    final public function run()
+    {
+    }
+}
+
+class protectedMethodClass extends publicMthodClass
+{
+    public function get()
+    {
+    } // valid
+    // public function run(){} ERROR can't override final method
+    // protected function test() {} // ERROR
+}
+
 ?>
