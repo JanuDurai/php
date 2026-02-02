@@ -1,6 +1,16 @@
 <?php
 header("Content-Type: application/json");
 
+spl_autoload_register(function ($className) {
+    $file = __DIR__ . "/" . $className . ".php";
+
+    if (file_exists($file)) {
+        require_once $file;
+    } else {
+        throw new Exception("Class file $className.php not found");
+    }
+});
+
 // Validate request method
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(["status" => "error", "message" => "Only POST allowed"]);
@@ -8,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Get inputs
-$num1 = $_POST['number_1'] ?? null;
-$num2 = $_POST['number_2'] ?? null;
+$num1     = $_POST['number_1'] ?? null;
+$num2     = $_POST['number_2'] ?? null;
 $operator = $_POST['operator'] ?? null;
 
 // Check required fields
@@ -19,7 +29,7 @@ if ($num1 === null || $num2 === null || $operator === null) {
 }
 
 // Validate numbers (no alphabets or special chars)
-if (!is_numeric($num1) || !is_numeric($num2)) {
+if (! is_numeric($num1) || ! is_numeric($num2)) {
     echo json_encode(["status" => "error", "message" => "Inputs must be numbers"]);
     exit;
 }
@@ -31,22 +41,22 @@ $num2 = (float) $num2;
 try {
     switch ($operator) {
         case '+':
-            require_once 'Add.php';
+            // require_once 'Add.php';
             $calc = new Add($num1, $num2);
             break;
 
         case '-':
-            require_once 'Subtract.php';
+            // require_once 'Subtract.php';
             $calc = new Subtract($num1, $num2);
             break;
 
         case '*':
-            require_once 'Multiply.php';
+            // require_once 'Multiply.php';
             $calc = new Multiply($num1, $num2);
             break;
 
         case '/':
-            require_once 'Divide.php';
+            // require_once 'Divide.php';
             $calc = new Divide($num1, $num2);
             break;
 
@@ -57,7 +67,7 @@ try {
 
     echo json_encode([
         "status" => 200,
-        "result" => $calc->calculate()
+        "result" => $calc->calculate(),
     ]);
 
 } catch (Exception $e) {
