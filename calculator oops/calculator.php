@@ -1,5 +1,10 @@
 <?php
-abstract class Calculator
+
+interface CalculatorInterface {
+    public function calculate();
+}
+
+abstract class Calculator implements CalculatorInterface
 {
     protected $num1;
     protected $num2;
