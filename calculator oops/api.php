@@ -11,12 +11,6 @@ spl_autoload_register(function ($className) {
     }
 });
 
-// Validate request method
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(["status" => "error", "message" => "Only POST allowed"]);
-    exit;
-}
-
 // Get inputs
 $num1     = $_POST['number_1'] ?? null;
 $num2     = $_POST['number_2'] ?? null;
